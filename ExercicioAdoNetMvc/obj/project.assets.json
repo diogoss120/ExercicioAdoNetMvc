@@ -7142,26 +7142,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ddiio\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\SUPORTE\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ddiio\\source\\repos\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc.csproj",
+      "projectUniqueName": "C:\\Program Files (x86)\\Realtek\\projetos\\CURSO MACORATTI\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc.csproj",
       "projectName": "ExercicioAdoNetMvc",
-      "projectPath": "C:\\Users\\ddiio\\source\\repos\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc.csproj",
-      "packagesPath": "C:\\Users\\ddiio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ddiio\\source\\repos\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc\\obj\\",
+      "projectPath": "C:\\Program Files (x86)\\Realtek\\projetos\\CURSO MACORATTI\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc.csproj",
+      "packagesPath": "C:\\Users\\SUPORTE\\.nuget\\packages\\",
+      "outputPath": "C:\\Program Files (x86)\\Realtek\\projetos\\CURSO MACORATTI\\ExercicioAdoNetMvc\\ExercicioAdoNetMvc\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ddiio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\SUPORTE\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -8,5 +8,6 @@ namespace ExercicioAdoNetMvc.Models
     public interface IAluno
     {
         List<Aluno> GetAlunos();
+        void InserirAluno(Aluno aluno);
     }
 }

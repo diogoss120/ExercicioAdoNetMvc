@@ -36,7 +36,6 @@ namespace ExercicioAdoNetMvc.Models
                         aluno.Email = reader["Email"].ToString();
                         aluno.Nascimento = Convert.ToDateTime(reader["Nascimento"]);
                         alunos.Add(aluno);
-                        Console.WriteLine(" nome :: " + reader["Nome"].ToString());
                     }
 
                 }
@@ -46,6 +45,32 @@ namespace ExercicioAdoNetMvc.Models
                 throw new ApplicationException(e.Message);
             }
             return alunos;
+        }
+
+        public void InserirAluno(Aluno aluno)
+        {
+            var configuration = ConfigurationHelper.GetConfiguration(Directory.GetCurrentDirectory());
+            var conexaoString = configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(conexaoString))
+                {
+                    string insert = "insert into Alunos(Nome, Sexo, Email, Nascimento) values(@Nome, @Sexo, @Email, @Nascimento)";
+                    MySqlCommand cmd = new MySqlCommand(insert, con);
+                    cmd.Parameters.AddWithValue("@Nome", aluno.Nome);
+                    cmd.Parameters.AddWithValue("@Sexo", aluno.Sexo);
+                    cmd.Parameters.AddWithValue("@Email", aluno.Email);
+                    cmd.Parameters.AddWithValue("@Nascimento", aluno.Nascimento);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
     }
 }

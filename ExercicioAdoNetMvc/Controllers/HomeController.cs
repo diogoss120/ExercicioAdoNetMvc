@@ -25,6 +25,24 @@ namespace ExercicioAdoNetMvc.Controllers
             return View("Lista", alunos);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Aluno aluno)
+        {
+            if (ModelState.IsValid)
+            {
+                AlunoBLL _aluno = new AlunoBLL();
+                _aluno.InserirAluno(aluno);
+                return RedirectToAction("Index");
+            }
+            ViewBag.Error = "Preencha todos os campos!";
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
