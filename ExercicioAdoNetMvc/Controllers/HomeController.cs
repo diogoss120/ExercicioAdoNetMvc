@@ -87,6 +87,17 @@ namespace ExercicioAdoNetMvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Details(int Id)
+        {
+            Aluno aluno = _aluno.GetAlunoById(Id);
+            return View(aluno);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
