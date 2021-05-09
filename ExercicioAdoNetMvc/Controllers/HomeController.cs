@@ -25,7 +25,7 @@ namespace ExercicioAdoNetMvc.Controllers
             return View("Lista", alunos);
         }
 
-        //[HttpGet]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -34,26 +34,11 @@ namespace ExercicioAdoNetMvc.Controllers
         [HttpPost]
         public IActionResult Create(Aluno aluno)
         {
-            /* Forma adicional de fazer validações
-            if (string.IsNullOrEmpty(aluno.Nome))
-            {
-                ModelState.AddModelError("Nome", "Nome inválido");
-            }
-            if (string.IsNullOrEmpty(aluno.Email))
-            {
-                ModelState.AddModelError("Email", "Email inválido");
-            }
-            if (string.IsNullOrEmpty(aluno.Sexo))
-            {
-                ModelState.AddModelError("Sexo", "Sexo inválido");
-            }
-            */
-            
-            if (aluno.Nascimento >= DateTime.Now.AddYears(-18) )
+            if (aluno.Nascimento >= DateTime.Now.AddYears(-18))
             {
                 ModelState.AddModelError("Nascimento", "Aluno menor de 18 anos");
             }
-           
+
             if (ModelState.IsValid)
             {
                 AlunoBLL _aluno = new AlunoBLL();
@@ -63,10 +48,34 @@ namespace ExercicioAdoNetMvc.Controllers
             ViewBag.Error = "Preencha todos os campos!";
             return View(aluno);
         }
-        public IActionResult Privacy()
+
+        [HttpGet]
+        public IActionResult Edit(int Id)
         {
-            return View();
+            AlunoBLL aluno = new AlunoBLL();
+            Aluno _aluno = aluno.GetAlunos().Single(a => a.Id == Id);
+            return View(_aluno);
         }
+
+        [HttpPost]
+        public IActionResult Edit(Aluno aluno)
+        {
+
+            if (aluno.Nascimento >= DateTime.Now.AddYears(-18))
+            {
+                ModelState.AddModelError("Nascimento", "Aluno menor de 18 anos");
+            }
+
+            if (ModelState.IsValid)
+            {
+                AlunoBLL _aluno = new AlunoBLL();
+                _aluno.AtualizarAluno(aluno);
+                return RedirectToAction("Index");
+            }
+            return View(aluno);
+
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

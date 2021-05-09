@@ -72,5 +72,32 @@ namespace ExercicioAdoNetMvc.Models
                 throw new ApplicationException(e.Message);
             }
         }
+
+        public void AtualizarAluno(Aluno aluno)
+        {
+            var configuration = ConfigurationHelper.GetConfiguration(Directory.GetCurrentDirectory());
+            var conexaoString = configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(conexaoString))
+                {
+                    string insert = "Update Alunos set Nome=@Nome,Sexo=@Sexo, Email=@Email, Nascimento=@Nascimento where Id=@Id";
+                    MySqlCommand cmd = new MySqlCommand(insert, con);
+                    cmd.Parameters.AddWithValue("@Id", aluno.Id);
+                    cmd.Parameters.AddWithValue("@Nome", aluno.Nome);
+                    cmd.Parameters.AddWithValue("@Sexo", aluno.Sexo);
+                    cmd.Parameters.AddWithValue("@Email", aluno.Email);
+                    cmd.Parameters.AddWithValue("@Nascimento", aluno.Nascimento);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
     }
 }
