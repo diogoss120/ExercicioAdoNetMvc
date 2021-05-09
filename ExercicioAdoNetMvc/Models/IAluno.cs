@@ -10,5 +10,7 @@ namespace ExercicioAdoNetMvc.Models
         List<Aluno> GetAlunos();
         void InserirAluno(Aluno aluno);
         void AtualizarAluno(Aluno aluno);
+        void DeletarAluno(int Id);
+        Aluno GetAlunoById(int Id);
     }
 }

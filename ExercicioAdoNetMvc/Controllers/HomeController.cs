@@ -42,7 +42,7 @@ namespace ExercicioAdoNetMvc.Controllers
             if (ModelState.IsValid)
             {
                 _aluno.InserirAluno(aluno);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             ViewBag.Error = "Preencha todos os campos!";
             return View(aluno);
@@ -51,7 +51,7 @@ namespace ExercicioAdoNetMvc.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            Aluno aluno = _aluno.GetAlunos().Single(a => a.Id == Id);
+            Aluno aluno = _aluno.GetAlunoById(Id);
             return View(aluno);
         }
 
@@ -67,10 +67,24 @@ namespace ExercicioAdoNetMvc.Controllers
             if (ModelState.IsValid)
             {
                 _aluno.AtualizarAluno(aluno);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(aluno);
 
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            Aluno aluno = _aluno.GetAlunoById(Id);
+            return View(aluno);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Aluno aluno)
+        {
+            _aluno.DeletarAluno(aluno.Id);
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

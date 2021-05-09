@@ -11,6 +11,37 @@ namespace ExercicioAdoNetMvc.Models
 {
     public class AlunoBLL : IAluno
     {
+        public Aluno GetAlunoById(int Id)
+        {
+            var configuration = ConfigurationHelper.GetConfiguration(Directory.GetCurrentDirectory());
+            var conexaoString = configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                Aluno aluno = new Aluno();
+                using (MySqlConnection con = new MySqlConnection(conexaoString))
+                {
+                    MySqlCommand command = new MySqlCommand("select * from Alunos where Id = @Id", con);
+                    command.Parameters.AddWithValue("@Id", Id);
+                    con.Open();
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        aluno.Id = Convert.ToInt32(reader["Id"]);
+                        aluno.Nome = reader["Nome"].ToString();
+                        aluno.Sexo = reader["Sexo"].ToString();
+                        aluno.Email = reader["Email"].ToString();
+                        aluno.Nascimento = Convert.ToDateTime(reader["Nascimento"]);
+                    }
+                }
+                return aluno;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
         public List<Aluno> GetAlunos()
         {
             var configuration = ConfigurationHelper.GetConfiguration(Directory.GetCurrentDirectory());
@@ -89,6 +120,29 @@ namespace ExercicioAdoNetMvc.Models
                     cmd.Parameters.AddWithValue("@Sexo", aluno.Sexo);
                     cmd.Parameters.AddWithValue("@Email", aluno.Email);
                     cmd.Parameters.AddWithValue("@Nascimento", aluno.Nascimento);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        public void DeletarAluno(int Id)
+        {
+            var configuration = ConfigurationHelper.GetConfiguration(Directory.GetCurrentDirectory());
+            var conexaoString = configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(conexaoString))
+                {
+                    string insert = "Delete from Alunos where Id=@Id";
+                    MySqlCommand cmd = new MySqlCommand(insert, con);
+                    cmd.Parameters.AddWithValue("@Id", Id);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
