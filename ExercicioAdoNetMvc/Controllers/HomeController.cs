@@ -93,6 +93,28 @@ namespace ExercicioAdoNetMvc.Controllers
             return View(aluno);
         }
 
+        public IActionResult Procurar(string? tipo, string? palavra)
+        {
+            IEnumerable<Aluno> alunos = _aluno.GetAlunos();
+            if (tipo == "Nome")
+            {
+                if (!string.IsNullOrEmpty(palavra))
+                {
+                    alunos = alunos.Where(a => a.Nome.ToLower() == palavra.ToLower());
+                }
+            }
+
+            if (tipo == "Email")
+            {
+                if (!string.IsNullOrEmpty(palavra))
+                {
+                    alunos = alunos.Where(a => a.Email.ToLower() == palavra.ToLower());
+                }
+            }
+
+            return View(alunos);
+        }
+
         public IActionResult Privacy()
         {
             return View();
