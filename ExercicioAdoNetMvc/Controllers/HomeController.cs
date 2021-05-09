@@ -25,7 +25,7 @@ namespace ExercicioAdoNetMvc.Controllers
             return View("Lista", alunos);
         }
 
-        [HttpGet]
+        //[HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -34,6 +34,26 @@ namespace ExercicioAdoNetMvc.Controllers
         [HttpPost]
         public IActionResult Create(Aluno aluno)
         {
+            /* Forma adicional de fazer validações
+            if (string.IsNullOrEmpty(aluno.Nome))
+            {
+                ModelState.AddModelError("Nome", "Nome inválido");
+            }
+            if (string.IsNullOrEmpty(aluno.Email))
+            {
+                ModelState.AddModelError("Email", "Email inválido");
+            }
+            if (string.IsNullOrEmpty(aluno.Sexo))
+            {
+                ModelState.AddModelError("Sexo", "Sexo inválido");
+            }
+            */
+            
+            if (aluno.Nascimento >= DateTime.Now.AddYears(-18) )
+            {
+                ModelState.AddModelError("Nascimento", "Aluno menor de 18 anos");
+            }
+           
             if (ModelState.IsValid)
             {
                 AlunoBLL _aluno = new AlunoBLL();
@@ -41,7 +61,7 @@ namespace ExercicioAdoNetMvc.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Error = "Preencha todos os campos!";
-            return View();
+            return View(aluno);
         }
         public IActionResult Privacy()
         {
