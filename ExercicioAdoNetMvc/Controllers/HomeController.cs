@@ -12,16 +12,16 @@ namespace ExercicioAdoNetMvc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private IAluno _aluno;
+        public HomeController(IAluno aluno, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _aluno = aluno;
         }
 
         public IActionResult Index()
         {
-            AlunoBLL aluno = new AlunoBLL();
-            List<Aluno> alunos = aluno.GetAlunos();
+            List<Aluno> alunos = _aluno.GetAlunos();
             return View("Lista", alunos);
         }
 
@@ -41,7 +41,6 @@ namespace ExercicioAdoNetMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                AlunoBLL _aluno = new AlunoBLL();
                 _aluno.InserirAluno(aluno);
                 return RedirectToAction("Index");
             }
@@ -52,9 +51,8 @@ namespace ExercicioAdoNetMvc.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            AlunoBLL aluno = new AlunoBLL();
-            Aluno _aluno = aluno.GetAlunos().Single(a => a.Id == Id);
-            return View(_aluno);
+            Aluno aluno = _aluno.GetAlunos().Single(a => a.Id == Id);
+            return View(aluno);
         }
 
         [HttpPost]
@@ -68,14 +66,12 @@ namespace ExercicioAdoNetMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                AlunoBLL _aluno = new AlunoBLL();
                 _aluno.AtualizarAluno(aluno);
                 return RedirectToAction("Index");
             }
             return View(aluno);
 
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

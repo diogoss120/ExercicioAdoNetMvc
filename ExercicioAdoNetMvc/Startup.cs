@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExercicioAdoNetMvc.Models;
 
 namespace ExercicioAdoNetMvc
 {
@@ -24,6 +25,7 @@ namespace ExercicioAdoNetMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IAluno, AlunoBLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
