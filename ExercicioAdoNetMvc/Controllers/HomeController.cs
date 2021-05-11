@@ -32,6 +32,7 @@ namespace ExercicioAdoNetMvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] // 
         public IActionResult Create(Aluno aluno)
         {
             if (aluno.Nascimento >= DateTime.Now.AddYears(-18))
