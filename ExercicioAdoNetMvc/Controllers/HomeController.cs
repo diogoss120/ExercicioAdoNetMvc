@@ -93,7 +93,7 @@ namespace ExercicioAdoNetMvc.Controllers
             return View(aluno);
         }
 
-        public IActionResult Procurar(string? tipo, string? palavra)
+        public IActionResult Procurar(string tipo, string palavra)
         {
             IEnumerable<Aluno> alunos = _aluno.GetAlunos();
             if (tipo == "Nome")
