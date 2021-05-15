@@ -13,3 +13,4 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [ASP.NET core MVC](https://docs.microsoft.com/pt-br/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio)
 - [Entity Framework Core](https://docs.microsoft.com/pt-br/ef/)
 - [MySql](https://www.mysql.com/)
+- [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)
