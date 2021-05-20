@@ -16,6 +16,7 @@
 .vs/
 ExercicioAdoNetMvc/obj
 ExercicioAdoNetMvc/bin
+ExercicioAdoNetMvc/.vscode
 
 # Mono auto generated files
 mono_crash.*

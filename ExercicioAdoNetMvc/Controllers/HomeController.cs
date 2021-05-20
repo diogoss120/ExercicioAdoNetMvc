@@ -1,16 +1,17 @@
 ﻿using ExercicioAdoNetMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ReflectionIT.Mvc.Paging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ExercicioAdoNetMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private const int V = 1;
         private readonly ILogger<HomeController> _logger;
         private IAluno _aluno;
         public HomeController(IAluno aluno, ILogger<HomeController> logger)
@@ -19,10 +20,11 @@ namespace ExercicioAdoNetMvc.Controllers
             _aluno = aluno;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageindex = 1)
         {
             List<Aluno> alunos = _aluno.GetAlunos();
-            return View("Lista", alunos);
+            var lista = PagingList.Create(alunos.OrderBy(a => a.Nome), 2, pageindex);
+            return View("Lista", lista);
         }
 
         [HttpGet]
@@ -93,7 +95,7 @@ namespace ExercicioAdoNetMvc.Controllers
             return View(aluno);
         }
 
-        public IActionResult Procurar(string? tipo, string? palavra)
+        public IActionResult Procurar(string tipo, string palavra)
         {
             IEnumerable<Aluno> alunos = _aluno.GetAlunos();
             if (tipo == "Nome")

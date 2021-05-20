@@ -1,9 +1,10 @@
-﻿@model IEnumerable<ExercicioAdoNetMvc.Models.Aluno>
+﻿@model PagingList<Aluno>
 
 <h1>Lista de alunos</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <div>
     <form action="/Home/Procurar" method="get">
         <span>Procurar </span>
@@ -64,3 +65,7 @@
         }
     </tbody>
 </table>
+
+<nav aria-label="Navegação">
+    <vc:pager paging-list="@Model"/>
+</nav>
